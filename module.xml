@@ -1,0 +1,20 @@
+<module>
+	<rawname>modfagi</rawname>
+	<name>Fast Agi</name>
+	<version>0.1.0</version>
+	<publisher>TelNowEdge</publisher>
+	<license>GPLv2+</license>
+	<changelog>
+		*0.1.0* Creation
+	</changelog>
+	<type>setup</type>
+	<category>Inbound Call Control</category>
+	<description>
+		Go call to FastAgi, if fast agi is not present go to failover, if fast agi return goes to normal destination.
+	</description>
+	<menuitems>
+		<fagi>Fast Agi</fagi>
+	</menuitems>
+	<location></location>
+	<md5sum></md5sum>
+</module>
