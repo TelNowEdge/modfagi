@@ -114,7 +114,7 @@ if ($itemid){
  <td><input type="text" name="agiquery" value="<?php echo (isset($thisItem['query']) ? $thisItem['query'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
 </tr>
 
-<tr><td colspan="2"><br><h5><?php echo _("Destination if Fast AGI return")?><hr></h5></td></tr>
+<tr><td colspan="2"><br><h5><?php echo _("Destination if Fast AGI return OK")?><hr></h5></td></tr>
 <?php 
 //draw goto selects
 if (isset($thisItem)) {
@@ -124,7 +124,7 @@ if (isset($thisItem)) {
 }
 ?>
 
-<tr><td colspan="2"><br><h5><?php echo _("Destination if Fast AGI Error")?><hr></h5></td></tr>
+<tr><td colspan="2"><br><h5><?php echo _("Destination if Fast AGI return NO (Default)")?><hr></h5></td></tr>
 
 <?php 
 //draw goto selects

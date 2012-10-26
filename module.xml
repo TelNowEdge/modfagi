@@ -1,14 +1,15 @@
 <module>
 	<rawname>modfagi</rawname>
 	<name>Fast Agi</name>
-	<version>0.1.0</version>
+	<version>4.0.0</version>
+        <type>setup</type>
+        <category>TNE</category>
 	<publisher>TelNowEdge</publisher>
 	<license>GPLv2+</license>
 	<changelog>
+	        *4.0.0* Passage en V4. Permet aussi le changement de CallerIDName et NUM
 		*0.1.0* Creation
 	</changelog>
-	<type>setup</type>
-	<category>Inbound Call Control</category>
 	<description>
 		Go call to FastAgi, if fast agi is not present go to failover, if fast agi return goes to normal destination.
 	</description>
