@@ -102,16 +102,16 @@ if ($itemid){
 </tr>
 <tr>
  <td><a href="#" class="info"><?php echo _("Port:")?><span><?php echo _("Port FAGI server is listening at (default 1585, is possible to change default in amportal.conf with FAGIPORT)")?></span></a></td>
- <td><input type="text" name="agiport" value="<?php echo (isset($thisItem['port']) ? $thisItem['port'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
+ <td><input type="text" name="agiport" size="8" value="<?php echo (isset($thisItem['port']) ? $thisItem['port'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
 </tr>
 								
 <tr>
  <td><a href="#" class="info"><?php echo _("Path:")?><span><?php echo _("Path for FAGI<br/>e.g.: /cidlookup")?></span></a></td>
- <td><input type="text" name="agipath" value="<?php echo (isset($thisItem['path']) ? $thisItem['path'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
+ <td><input type="text" name="agipath"  size="15" value="<?php echo (isset($thisItem['path']) ? $thisItem['path'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
 </tr>
 <tr>
  <td><a href="#" class="info"><?php echo _("Query:")?><span><?php echo _("Query string")?></span></a></td>
- <td><input type="text" name="agiquery" value="<?php echo (isset($thisItem['query']) ? $thisItem['query'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
+ <td><input type="text" name="agiquery" size="128" value="<?php echo (isset($thisItem['query']) ? $thisItem['query'] : ''); ?>" tabindex="<?php echo ++$tabindex;?>"></td>
 </tr>
 
 <tr><td colspan="2"><br><h5><?php echo _("Destination if Fast AGI return OK")?><hr></h5></td></tr>
