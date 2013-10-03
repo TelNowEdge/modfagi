@@ -8,14 +8,13 @@ function modfagi_getdest($id) {
 function modfagi_getdestinfo($dest) {
     global $active_modules;
 
-    if (substr(trim($dest),0,9) == 'ext-fagi,') {
+    if (substr(trim($dest),0,5) == 'fagi,') {
         $exten = explode(',',$dest);
         $exten = $exten[1];
         $thisexten = modfagi_list($exten);
         if (empty($thisexten)) {
             return array();
         } else {
-            //$type = isset($active_modules['announcement']['type'])?$active_modules['announcement']['type']:'setup';
             return array('description' => sprintf(_("FastAgi %s : %s"),$exten,$thisexten['description']),
                          'edit_url' => 'config.php?isplay=fagi&itemid='.urlencode($thisexten['id']),
                          );
