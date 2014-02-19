@@ -46,7 +46,7 @@ function modfagi_check_destinations($dest=true) {
         $thisid      = $result['id'];
         $description = sprintf(_("Fast AGI: %s"),$result['displayname']);
         $thisurl     = 'config.php?display=fagi&itemid='.urlencode($thisid);
-        if ($dest === true || $dest = $thisdest) {
+        if ($dest === true || $dest[0] == $thisdest) {
             $destlist[] = array(
                                 'dest' => $thisdest,
                                 'description' => $description,
@@ -54,7 +54,7 @@ function modfagi_check_destinations($dest=true) {
                                 );
         }
         $thisdest = $result['falsegoto'];
-        if ($dest === true || $dest = $thisdest) {
+        if ($dest === true || $dest[0] == $thisdest) {
             $destlist[] = array(
                                 'dest' => $thisdest,
                                 'description' => $description,
