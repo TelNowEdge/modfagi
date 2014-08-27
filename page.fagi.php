@@ -43,8 +43,6 @@ switch ($action) {
 $fagis = modfagi_list();
 ?>
 
-</div> <!-- end content div so we can display rnav properly-->
-
 <!-- right side menu -->
 <div class="rnav"><ul>
     <li><a id="<?php echo ($itemid=='' ? 'current':'') ?>" href="config.php?display=<?php echo urlencode($dispnum)?>"><?php echo _("Add Fast AGI")?></a></li>
@@ -57,14 +55,14 @@ if (isset($fagis)) {
 ?>
 </ul></div>
 
-<div class="content">
 <?php
 if ($itemid){ 
   $thisItem = modfagi_get($itemid);
 }
-?>
-  <h2><?php echo ($itemid ? _("Fast Agi:")." ". $thisItem['displayname'] : _("Fast Agi")); ?></h2>
-<?php		
+if (! $_REQUEST['fw_popover']) {
+ echo  '<h2>'.($itemid ? _("Fast Agi:")." ". $thisItem['displayname'] : _("Fast Agi"))." </h2>\n";
+}
+
 if ($itemid){ 
   $delURL = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'].'&action=delete';
   $tlabel = sprintf(_("Delete Fast Agi: %s"),trim($thisItem['displayname']) == '' ? $itemid : $thisItem['displayname']." ($itemid) ");
@@ -80,7 +78,7 @@ if ($itemid){
   }
 } 
 ?>
-<form autocomplete="off" name="fagi" action="<?php $_SERVER['PHP_SELF'] ?>" method="post" onsubmit="return checkName(fagi);">
+<form name="fagi" action="<?php $_SERVER['PHP_SELF'] ?>" method="post" onsubmit="return checkName(fagi);">
 <input type="hidden" name="display" value="<?php echo $dispnum?>">
 <input type="hidden" name="action" value="<?php echo ($itemid ? 'edit' : 'add') ?>">
 <?php		if ($itemid){ ?>
