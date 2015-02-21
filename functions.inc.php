@@ -140,25 +140,62 @@ function modfagi_del($id){
 
 
 function modfagi_add($post){
-    global $amp_conf;  
+    global $amp_conf;
+    global $db;
+    
     extract($post);
 
+    //Protection injection SQL
+    $displayname=$db->escapeSimple($displayname);
+    $agidesc=$db->escapeSimple($agidesc);
+
+    $badchar = array('\'', '"', '\t');
+
+    $agihost = str_replace($badchar, "", $agihost);
+    $agihost=$db->escapeSimple($agihost);
+
+    $agiport = str_replace($badchar, "", $agiport);
+    $agiport=$db->escapeSimple($agiport);
+
+    $agipath=$db->escapeSimple($agipath);
+    $agiquery=$db->escapeSimple($agiquery);
+    $goto00=$db->escapeSimple(${$goto0.'0'});
+    $goto11=$db->escapeSimple(${$goto1.'1'});
+    
     if ($agiport =='') {
         $agiport=(isset($amp_conf['FAGIPORT']))?$amp_conf['FAGIPORT']:'1985';
     }
     $results = sql("INSERT INTO fagi (displayname,description,host,port,path,query,truegoto,falsegoto) values 
-   ('$displayname','$agidesc','$agihost','$agiport','$agipath','$agiquery','${$goto0.'0'}','${$goto1.'1'}')");
+   ('$displayname','$agidesc','$agihost','$agiport','$agipath','$agiquery','$goto00','$goto11')");
 
 }
 
 function modfagi_edit($id,$post){
+    global $db;
+
     extract($post);
+    //Protection injection SQL
+    $displayname=$db->escapeSimple($displayname);
+    $agidesc=$db->escapeSimple($agidesc);
+
+    $badchar = array('\'', '"', '\t');
+
+    $agihost = str_replace($badchar, "", $agihost);
+    $agihost=$db->escapeSimple($agihost);
+
+    $agiport = str_replace($badchar, "", $agiport);
+    $agiport=$db->escapeSimple($agiport);
+
+    $agipath=$db->escapeSimple($agipath);
+    $agiquery=$db->escapeSimple($agiquery);
+    $goto00=$db->escapeSimple(${$goto0.'0'});
+    $goto11=$db->escapeSimple(${$goto1.'1'});
 
     if ($agiport =='') {
         $agiport=(isset($amp_conf['FAGIPORT']))?$amp_conf['FAGIPORT']:'1985';
     }
     $results = sql("UPDATE fagi set displayname='$displayname',description='$agidesc',host='$agihost',port='$agiport',path='$agipath',
-query='$agiquery',truegoto='${$goto0.'0'}',falsegoto='${$goto1.'1'}' where id='$id'"); 
+query='$agiquery',truegoto='$goto00',falsegoto='$goto11' where id='$id'"); 
 }
 
 ?>
