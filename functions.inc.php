@@ -16,7 +16,7 @@ function modfagi_getdestinfo($dest) {
             return array();
         } else {
             return array('description' => sprintf(_("FastAgi %s : %s"),$exten,$thisexten['description']),
-                         'edit_url' => 'config.php?isplay=fagi&itemid='.urlencode($thisexten['id']),
+                         'edit_url' => 'config.php?display=fagi&itemid='.urlencode($thisexten['id']),
                          );
         }
     } else {
