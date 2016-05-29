@@ -100,10 +100,11 @@ function modfagi_get_config($engine) {
                 $fagidesc=$item['description'];
                 $ext->add($context, $id, '', new ext_noop('Fast Agi: '.$fagidesc));
                 $ext->add($context, $id, '', new ext_setvar('FAGIRUN','NO'));
+                $ext->add($context, $id, '', new ext_setvar('FAGICIDNAME','TNEnotsetENT'));
                 $agi="agi://".$item['host'].":".$item['port']."/".$item['path'];
                 if ($item['query'] != '') {$agi .="?".$item['query'];}
                 $ext->add($context, $id, '', new ext_agi($agi));
-                $ext->add($context, $id, '', new ext_execif('$["${FAGICIDNAME}" !=""]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
+                $ext->add($context, $id, '', new ext_execif('$["${FAGICIDNAME}" !="TNEnotsetENT"]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
                 $ext->add($context, $id, '', new ext_gotoif('$["${FAGIRUN}"="NO"]','notrun'));
                 list($cont,$exten,$prio)=explode(',',$item['truegoto']);
                 $ext->add($context, $id, '', new ext_goto($prio,$exten,$cont));
