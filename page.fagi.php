@@ -26,6 +26,11 @@ switch ($action) {
 		needreload();
 		redirect_standard();
 	break;
+	case "duplicate":
+		$_REQUEST['itemid']=modfagi_duplicate($itemid);
+		needreload();
+		redirect_standard('itemid');
+	break;
 	case "delete":
 		modfagi_del($itemid);
 		needreload();
@@ -55,6 +60,7 @@ if (isset($fagis)) {
 ?>
 </ul></div>
 
+
 <?php
 if ($itemid){ 
   $thisItem = modfagi_get($itemid);
@@ -69,6 +75,12 @@ if ($itemid){
   $label = '<span><img width="16" height="16" border="0" title="'.$tlabel.'" alt="" src="images/core_delete.png"/>&nbsp;'.$tlabel.'</span>';
 ?>
   <a href="<?php echo $delURL ?>"><?php echo $label; ?></a><br />
+<?php
+  $dupURL = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'].'&action=duplicate';
+  $tlabel = sprintf(_("Duplicate Fast Agi: %s"),trim($thisItem['displayname']) == '' ? $itemid : $thisItem['displayname']." ($itemid) ");
+  $label = '<span><img width="16" height="16" border="0" title="'.$tlabel.'" alt="" src="images/core_add.png"/>&nbsp;'.$tlabel.'</span>';
+?>
+        <a href="<?php echo $dupURL ?>"><?php echo $label; ?></a><br />
 <?php
   $usage_list = framework_display_destination_usage(modfagi_getdest($itemid));
   if (!empty($usage_list)) {
