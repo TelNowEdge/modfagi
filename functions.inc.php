@@ -142,13 +142,15 @@ function modfagi_del($id){
 function modfagi_duplicate($id){
     global $amp_conf;
     global $db;
-    
+    global $db;
 
     $prev=modfagi_get($id);
     if ($prev['displayname'] != '') {
         $displayname='Dup_'.$prev['displayname'];
+        $displayname=$db->escapeSimple($displayname);
+        $description=$db->escapeSimple($prev['description']);
         $results = sql("INSERT INTO fagi (displayname,description,host,port,path,query,truegoto,falsegoto) values 
-   ('$displayname','{$prev['description']}','{$prev['host']}','{$prev['port']}','{$prev['path']}','{$prev['query']}','{$prev['truegoto']}','{$prev['falsegoto']}')");
+   ('$displayname','$description','{$prev['host']}','{$prev['port']}','{$prev['path']}','{$prev['query']}','{$prev['truegoto']}','{$prev['falsegoto']}')");
         $id=sql("SELECT max(id) FROM fagi",'getOne');
     }
     return($id);
