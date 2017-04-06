@@ -102,7 +102,10 @@ function modfagi_get_config($engine) {
                 $ext->add($context, $id, '', new ext_setvar('FAGIRUN','NO'));
                 $ext->add($context, $id, '', new ext_setvar('FAGICIDNAME','TNEnotsetENT'));
                 $agi="agi://".$item['host'].":".$item['port']."/".$item['path'];
-                if ($item['query'] != '') {$agi .="?".$item['query'];}
+                if ($item['query'] != '') {
+                    parse_str($item['query'], $query);
+                    $agi .="?".http_build_query($query,'arg','&');
+                }
                 $ext->add($context, $id, '', new ext_agi($agi));
                 $ext->add($context, $id, '', new ext_execif('$["${FAGICIDNAME}" !="TNEnotsetENT"]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
                 $ext->add($context, $id, '', new ext_gotoif('$["${FAGIRUN}"="NO"]','notrun'));

@@ -14,7 +14,7 @@
 
 isset($_REQUEST['action'])?$action = $_REQUEST['action']:$action='';
 //the item we are currently displaying
-isset($_REQUEST['itemid'])?$itemid=mysql_real_escape_string($_REQUEST['itemid']):$itemid='';
+isset($_REQUEST['itemid'])?$itemid=tneCleanVar('int',$_REQUEST['itemid']):$itemid='';
 
 $dispnum = "fagi"; //used for switch on config.php
 $tabindex = 0;
