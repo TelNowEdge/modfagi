@@ -104,7 +104,7 @@ function modfagi_get_config($engine) {
                 $agi="agi://".$item['host'].":".$item['port']."/".$item['path'];
                 if ($item['query'] != '') {
                     parse_str($item['query'], $query);
-                    $agi .="?".http_build_query($query,'arg','&');
+                    $agi .="?".http_build_query($query,'arg','&',PHP_QUERY_RFC3986);
                 }
                 $ext->add($context, $id, '', new ext_agi($agi));
                 $ext->add($context, $id, '', new ext_execif('$["${FAGICIDNAME}" !="TNEnotsetENT"]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
