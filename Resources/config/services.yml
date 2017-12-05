@@ -1,0 +1,33 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: false
+    public: true
+
+  TelNowEdge\Module\modfagi\Controller\PageController:
+    parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
+    autowire: true
+    autoconfigure: false
+    public: true
+    tags:
+      - "telnowedge.controller"
+
+  TelNowEdge\Module\modfagi\Controller\FagiController:
+    parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
+    autowire: true
+    autoconfigure: false
+    public: true
+    tags:
+      - "telnowedge.controller"
+
+  TelNowEdge\Module\modfagi\Repository\FagiRepository:
+    parent: TelNowEdge\FreePBX\Base\Repository\AbstractRepository
+    autowire: true
+    autoconfigure: false
+    public: true
+
+  TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler:
+    parent: TelNowEdge\FreePBX\Base\Handler\AbstractDbHandler
+    autowire: true
+    autoconfigure: false
+    public: true

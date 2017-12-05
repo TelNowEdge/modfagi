@@ -1,27 +1,25 @@
 <module>
-	<rawname>modfagi</rawname>
-	<name>Fast Agi</name>
-	<version>4.1.0</version>
-        <type>setup</type>
-        <category>TNE</category>
-	<publisher>TelNowEdge</publisher>
-	<license>GPLv2+</license>
-	<changelog>
-	        *4.1.0  Support du popover de FreePBX 2.11
-	        *4.0.0* Passage en V4. Permet aussi le changement de CallerIDName et NUM
-		*0.1.0* Creation
-	</changelog>
-	<description>
-		Go call to FastAgi, if fast agi is not present go to failover, if fast agi return goes to normal destination.
-	</description>
-	<menuitems>
-		<fagi>Fast Agi</fagi>
-	</menuitems>
-	<popovers>
-	  <modfagi>
-	    <display>fagi</display>
-	  </modfagi>
-	</popovers>
-	<location></location>
-	<md5sum></md5sum>
+  <rawname>modfagi</rawname>
+  <name>Fast Agi</name>
+  <version>14.0.1</version>
+  <type>setup</type>
+  <category>TNE</category>
+  <publisher>TelNowEdge</publisher>
+  <license>GPLv2+</license>
+  <changelog>
+
+  </changelog>
+  <description>
+    Go call to FastAgi, if fast agi is not present go to failover, if fast agi return goes to normal destination.
+  </description>
+  <menuitems>
+    <fagi>Fast Agi</fagi>
+  </menuitems>
+  <popovers>
+    <modfagi>
+      <display>fagi</display>
+    </modfagi>
+  </popovers>
+  <location></location>
+  <md5sum></md5sum>
 </module>
