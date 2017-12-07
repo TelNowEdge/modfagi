@@ -4,16 +4,19 @@ namespace FreePBX\modules;
 
 use TelNowEdge\FreePBX\Base\Exception\NoResultException;
 use TelNowEdge\FreePBX\Base\Module\Module;
+use TelNowEdge\Module\modfagi\Controller\AjaxController;
 use TelNowEdge\Module\modfagi\Controller\FagiController;
 use TelNowEdge\Module\modfagi\Controller\PageController;
-use TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler;
-use TelNowEdge\Module\modfagi\Repository\FagiRepository;
+use TelNowEdge\Module\modfagi\Resources\Migrations\FagiMigration;
 
 class Modfagi extends Module implements \BMO
 {
     public function install()
     {
-
+        $this
+            ->get(FagiMigration::class)
+            ->migrate()
+            ;
     }
 
     public function uninstall()
