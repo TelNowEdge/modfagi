@@ -4,6 +4,7 @@ namespace TelNowEdge\Module\modfagi\Controller;
 
 use TelNowEdge\FreePBX\Base\Controller\AbstractController;
 use TelNowEdge\FreePBX\Base\Helper\DestinationHelper;
+use TelNowEdge\FreePBX\Base\Exception\NoResultException;
 use TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler;
 use TelNowEdge\Module\modfagi\Repository\FagiRepository;
 
