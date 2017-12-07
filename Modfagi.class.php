@@ -50,38 +50,9 @@ class Modfagi extends Module implements \BMO
 
         switch ($command) {
         case 'getFagiGrid':
-            try {
-                $res = $this
-                    ->get(FagiRepository::class)
-                    ->getCollection()
-                    ;
-            } catch(NoResultException $e) {
-                $res = array();
-            }
-
-            return $this->get('serializer')->normalize($res);
-
+            return $this->get(AjaxController::class)->getFagiGrid();
         case 'deleteFagi':
-            $id = $request->request->getInt('id', 0);
-
-            if (0 >= $id) {
-                return false;
-            }
-
-            try {
-                $fagi = $this
-                    ->get(FagiRepository::class)
-                    ->getById($id)
-                    ;
-            } catch (NoResultException $e) {
-                return $this->get('serializer')->normalize(array('success' => false));
-            }
-
-            $this->get(FagiDbHandler::class)
-                 ->delete($fagi)
-                ;
-
-            return $this->get('serializer')->normalize(array('success' => true));
+            return $this->get(AjaxController::class)->deleteFagi();
         }
     }
 
