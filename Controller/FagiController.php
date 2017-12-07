@@ -6,7 +6,6 @@ use TelNowEdge\FreePBX\Base\Controller\AbstractController;
 use TelNowEdge\Module\modfagi\Form\FagiType;
 use TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler;
 use TelNowEdge\Module\modfagi\Repository\FagiRepository;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class FagiController extends AbstractController
 {
