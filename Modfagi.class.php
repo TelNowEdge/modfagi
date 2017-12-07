@@ -93,6 +93,13 @@ class Modfagi extends Module implements \BMO
             return;
         }
 
+        if ('true' === $request->request->get('duplicate')) {
+            return $this
+                ->get(FagiController::class)
+                ->duplicateAction()
+                ;
+        }
+
         if (0 < $id = $request->query->getInt('id', 0)) {
             if ('del' === $request->query->get('action')) {
                 return $this
@@ -142,7 +149,7 @@ class Modfagi extends Module implements \BMO
                 'name' => 'submit',
                 'id' => 'submit',
                 'value' => _('Submit')
-            )
+            ),
         );
 
         if (true === $request->query->has('id')) {
@@ -150,6 +157,11 @@ class Modfagi extends Module implements \BMO
                 'name' => 'delete',
                 'id' => 'delete',
                 'value' => _('Delete')
+            );
+            $buttons['duplicate'] = array(
+                'name' => 'duplicate',
+                'id' => 'duplicate',
+                'value' => _('Duplicate')
             );
         }
 
