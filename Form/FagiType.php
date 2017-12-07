@@ -5,8 +5,9 @@ namespace TelNowEdge\Module\modfagi\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use TelNowEdge\Module\modfagi\Model\Fagi;
 use TelNowEdge\FreePBX\Base\Form\DestinationType;
+use TelNowEdge\Module\modfagi\Model\Fagi;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class FagiType extends AbstractType
 {
@@ -16,7 +17,7 @@ class FagiType extends AbstractType
             ->add('displayName')
             ->add('description')
             ->add('host')
-            ->add('port')
+            ->add('port', NumberType::class)
             ->add('path')
             ->add('query')
             ->add('trueGoto', DestinationType::class, array(

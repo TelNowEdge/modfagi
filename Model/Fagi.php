@@ -2,6 +2,7 @@
 
 namespace TelNowEdge\Module\modfagi\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use TelNowEdge\FreePBX\Base\Form\Model\Destination;
 
 class Fagi
@@ -12,41 +13,49 @@ class Fagi
     protected $id;
 
     /**
-     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
      */
     protected $displayName;
+
     /**
-     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
      */
     protected $description;
 
     /**
-     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
      */
     protected $host;
 
     /**
-     *
+     * @Assert\Type("integer")
+     * @Assert\NotNull()
      */
     protected $port;
 
     /**
-     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
      */
     protected $path;
 
     /**
-     *
+     * @Assert\Type("string")
      */
     protected $query;
 
     /**
-     *
+     * @Assert\NotNull()
+     * @Assert\Valid()
      */
     protected $trueGoto;
 
     /**
-     *
+     * @Assert\NotNull()
+     * @Assert\Valid()
      */
     protected $falseGoto;
 

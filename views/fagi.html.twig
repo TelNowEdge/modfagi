@@ -1,3 +1,5 @@
+{% include '@telnowedge/js/destination.js.twig' %}
+
 <div class="fpbx-container container-fluid">
   <div class="row">
     <div class="col-sm-12">
@@ -40,4 +42,10 @@
  });
 </script>
 
-{% include '@telnowedge/js/destination.js.twig' with {'module': 'modfagi'} %}
+<script type="text/javascript">
+ // Wait one digest to prevent loading process
+ setTimeout(function () {
+   processForm('#{{form.vars.name}}_trueGoto_Category', '#{{form.vars.name}}_trueGoto_Destination');
+   processForm('#{{form.vars.name}}_falseGoto_Category', '#{{form.vars.name}}_falseGoto_Destination');
+ });
+</script>
