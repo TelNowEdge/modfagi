@@ -2,6 +2,8 @@
 
 namespace TelNowEdge\Module\modfagi\Model;
 
+use TelNowEdge\FreePBX\Base\Form\Model\Destination;
+
 class Fagi
 {
     /**
@@ -50,7 +52,8 @@ class Fagi
 
     public function __construct()
     {
-
+        $this->trueGoto = new Destination();
+        $this->falseGoto = new Destination();
     }
 
     /**
@@ -214,5 +217,4 @@ class Fagi
 
         return $this;
     }
-
 }

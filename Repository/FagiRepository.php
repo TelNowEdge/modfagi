@@ -2,6 +2,7 @@
 
 namespace TelNowEdge\Module\modfagi\Repository;
 
+use TelNowEdge\FreePBX\Base\Form\Model\Destination;
 use TelNowEdge\FreePBX\Base\Repository\AbstractRepository;
 use TelNowEdge\Module\modfagi\Model\Fagi;
 
@@ -16,8 +17,8 @@ SELECT
         ,f.port f__port
         ,f.path f__path
         ,f.query f__query
-        ,f.truegoto f__true_goto
-        ,f.falsegoto f__false_goto
+        ,f.truegoto destination_true__destination
+        ,f.falsegoto destination_false__destination
     FROM
         fagi f
 ';
@@ -53,8 +54,39 @@ SELECT
         );
     }
 
+    public function getByDisplayNameLike($displayName)
+    {
+        $collection = new \Doctrine\Common\Collections\ArrayCollection;
+
+        $sql = sprintf('%s WHERE displayname LIKE :displayName', self::SQL);
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam('displayName', sprintf('%s%%', $displayName));
+        $stmt->execute();
+
+        $res = $this->fetchAll($stmt);
+            xdebug_break();
+
+        foreach ($res as $child) {
+            $x = $this->sqlToArray($child);
+            $collection->add($this->mapModel($x));
+        }
+
+        return $collection;
+
+    }
+
     private function mapModel(array $res)
     {
-        return $this->objectFromArray(Fagi::class, $res['f']);
+        $trueGoto = $this->objectFromArray(Destination::class, $res['destination_true']);
+        $falseGoto = $this->objectFromArray(Destination::class, $res['destination_false']);
+        $fagi = $this->objectFromArray(Fagi::class, $res['f']);
+
+        $fagi
+            ->setTrueGoto($trueGoto)
+            ->setFalseGoto($falseGoto)
+            ;
+
+        return $fagi;
     }
 }

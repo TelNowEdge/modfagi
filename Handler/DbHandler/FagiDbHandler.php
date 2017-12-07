@@ -40,8 +40,8 @@ INSERT
         $stmt->bindParam('port', $fagi->getPort());
         $stmt->bindParam('path', $fagi->getPath());
         $stmt->bindParam('query', $fagi->getQuery());
-        $stmt->bindParam('trueGoto', $fagi->getTrueGoto());
-        $stmt->bindParam('falseGoto', $fagi->getFalseGoto());
+        $stmt->bindParam('trueGoto', $fagi->getTrueGoto()->getDestination());
+        $stmt->bindParam('falseGoto', $fagi->getFalseGoto()->getDestination());
 
         $stmt->execute();
 
@@ -58,9 +58,9 @@ UPDATE
     SET
         displayname = :displayName
         ,description = :description
-        ,HOST = :host
+        ,host = :host
         ,port = :port
-        ,PATH = :path
+        ,path = :path
         ,query = :query
         ,truegoto = :trueGoto
         ,falsegoto = :falseGoto
@@ -75,8 +75,8 @@ UPDATE
         $stmt->bindParam('port', $fagi->getPort());
         $stmt->bindParam('path', $fagi->getPath());
         $stmt->bindParam('query', $fagi->getQuery());
-        $stmt->bindParam('trueGoto', $fagi->getTrueGoto());
-        $stmt->bindParam('falseGoto', $fagi->getFalseGoto());
+        $stmt->bindParam('trueGoto', $fagi->getTrueGoto()->getDestination());
+        $stmt->bindParam('falseGoto', $fagi->getFalseGoto()->getDestination());
 
         $stmt->execute();
 
