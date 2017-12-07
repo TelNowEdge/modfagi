@@ -32,6 +32,56 @@ class FagiController extends AbstractController
         return $this->processForm($form);
     }
 
+    public function duplicateAction()
+    {
+        $request = $this->get('request');
+
+        $form = $this->createForm(
+            FagiType::class
+        );
+
+        $form->handleRequest($request);
+
+        if (true === $form->isSubmitted() && true === $form->isValid()) {
+            $fagi = $form->getData();
+
+            try {
+                $storedFagis = $this
+                    ->get(FagiRepository::class)
+                    ->getByDisplayNameLike($fagi->getDisplayName())
+                    ;
+
+                $names = array();
+                foreach ($storedFagis as $storedFagi) {
+                    array_push($names, $storedFagi->getDisplayName());
+                }
+
+                rsort($names);
+
+                $name = reset($names);
+
+                if (0 !== preg_match('/(.+)_(.+)$/', $name, $match)) {
+                    $fagi->setDisplayName(sprintf('%s_%d', $match[1], (int) $match[2] + 1));
+                } else {
+                    $fagi->setDisplayName(sprintf('%s_1', $name));
+                }
+
+            } catch (NoResultException $e) {
+
+            }
+
+            $this->get(FagiDbHandler::class)
+                 ->create($fagi)
+                ;
+
+            redirect(
+                sprintf('config.php?display=fagi&id=%d', $form->getData()->getId())
+            );
+        }
+
+        return $this->processForm($form);
+    }
+
     public function editAction($id)
     {
         $request = $this->get('request');
