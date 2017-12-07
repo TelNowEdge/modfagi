@@ -7,9 +7,6 @@ use TelNowEdge\FreePBX\Base\Form\Model\Destination;
 
 class Fagi
 {
-    /**
-     *
-     */
     protected $id;
 
     /**
@@ -65,17 +62,11 @@ class Fagi
         $this->falseGoto = new Destination();
     }
 
-    /**
-     *
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     *
-     */
     public function setId($id)
     {
         $this->id = $id;
@@ -83,17 +74,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getDisplayName()
     {
         return $this->displayName;
     }
 
-    /**
-     *
-     */
     public function setDisplayName($displayName)
     {
         $this->displayName = $displayName;
@@ -101,17 +86,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     *
-     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -119,17 +98,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getHost()
     {
         return $this->host;
     }
 
-    /**
-     *
-     */
     public function setHost($host)
     {
         $this->host = $host;
@@ -137,17 +110,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getPort()
     {
         return $this->port;
     }
 
-    /**
-     *
-     */
     public function setPort($port)
     {
         $this->port = $port;
@@ -155,17 +122,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getPath()
     {
         return $this->path;
     }
 
-    /**
-     *
-     */
     public function setPath($path)
     {
         $this->path = $path;
@@ -173,17 +134,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getQuery()
     {
         return $this->query;
     }
 
-    /**
-     *
-     */
     public function setQuery($query)
     {
         $this->query = $query;
@@ -191,17 +146,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getTrueGoto()
     {
         return $this->trueGoto;
     }
 
-    /**
-     *
-     */
     public function setTrueGoto($trueGoto)
     {
         $this->trueGoto = $trueGoto;
@@ -209,17 +158,11 @@ class Fagi
         return $this;
     }
 
-    /**
-     *
-     */
     public function getFalseGoto()
     {
         return $this->falseGoto;
     }
 
-    /**
-     *
-     */
     public function setFalseGoto($falseGoto)
     {
         $this->falseGoto = $falseGoto;

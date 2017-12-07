@@ -65,9 +65,7 @@ class FagiController extends AbstractController
                 } else {
                     $fagi->setDisplayName(sprintf('%s_1', $name));
                 }
-
             } catch (NoResultException $e) {
-
             }
 
             $this->get(FagiDbHandler::class)
@@ -91,7 +89,7 @@ class FagiController extends AbstractController
                 ->get(FagiRepository::class)
                 ->getById($id)
                 ;
-        } catch(NoResultException $e) {
+        } catch (NoResultException $e) {
             return;
         }
 
@@ -113,14 +111,12 @@ class FagiController extends AbstractController
 
     public function deleteAction($id)
     {
-        $request = $this->get('request');
-
         try {
             $fagi = $this
                 ->get(FagiRepository::class)
                 ->getById($id)
                 ;
-        } catch(NoResultException $e) {
+        } catch (NoResultException $e) {
             return;
         }
 

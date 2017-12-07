@@ -3,11 +3,11 @@
 namespace TelNowEdge\Module\modfagi\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TelNowEdge\FreePBX\Base\Form\DestinationType;
 use TelNowEdge\Module\modfagi\Model\Fagi;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class FagiType extends AbstractType
 {
@@ -21,10 +21,10 @@ class FagiType extends AbstractType
             ->add('path')
             ->add('query')
             ->add('trueGoto', DestinationType::class, array(
-                'label' => _('[AGI] Success')
+                'label' => _('[AGI] Success'),
             ))
             ->add('falseGoto', DestinationType::class, array(
-                'label' => _('[AGI] Error')
+                'label' => _('[AGI] Error'),
             ))
             ;
     }
@@ -36,5 +36,4 @@ class FagiType extends AbstractType
                 'data_class' => Fagi::class,
             ));
     }
-
 }

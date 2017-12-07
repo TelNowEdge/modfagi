@@ -2,7 +2,6 @@
 
 namespace FreePBX\modules;
 
-use TelNowEdge\FreePBX\Base\Exception\NoResultException;
 use TelNowEdge\FreePBX\Base\Module\Module;
 use TelNowEdge\Module\modfagi\Controller\AjaxController;
 use TelNowEdge\Module\modfagi\Controller\FagiController;
@@ -117,12 +116,12 @@ class Modfagi extends Module implements \BMO
             'reset' => array(
                 'name' => 'reset',
                 'id' => 'reset',
-                'value' => _('Reset')
+                'value' => _('Reset'),
             ),
             'submit' => array(
                 'name' => 'submit',
                 'id' => 'submit',
-                'value' => _('Submit')
+                'value' => _('Submit'),
             ),
         );
 
@@ -130,12 +129,12 @@ class Modfagi extends Module implements \BMO
             $buttons['delete'] = array(
                 'name' => 'delete',
                 'id' => 'delete',
-                'value' => _('Delete')
+                'value' => _('Delete'),
             );
             $buttons['duplicate'] = array(
                 'name' => 'duplicate',
                 'id' => 'duplicate',
-                'value' => _('Duplicate')
+                'value' => _('Duplicate'),
             );
         }
 

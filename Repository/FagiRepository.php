@@ -25,7 +25,7 @@ SELECT
 
     public function getCollection()
     {
-        $collection = new \Doctrine\Common\Collections\ArrayCollection;
+        $collection = new \Doctrine\Common\Collections\ArrayCollection();
 
         $stmt = $this->connection->prepare(self::SQL);
 
@@ -56,7 +56,7 @@ SELECT
 
     public function getByDisplayNameLike($displayName)
     {
-        $collection = new \Doctrine\Common\Collections\ArrayCollection;
+        $collection = new \Doctrine\Common\Collections\ArrayCollection();
 
         $sql = sprintf('%s WHERE displayname LIKE :displayName', self::SQL);
 
@@ -65,7 +65,7 @@ SELECT
         $stmt->execute();
 
         $res = $this->fetchAll($stmt);
-            xdebug_break();
+        xdebug_break();
 
         foreach ($res as $child) {
             $x = $this->sqlToArray($child);
@@ -73,7 +73,6 @@ SELECT
         }
 
         return $collection;
-
     }
 
     private function mapModel(array $res)

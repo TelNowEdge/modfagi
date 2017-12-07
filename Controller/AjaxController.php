@@ -3,7 +3,6 @@
 namespace TelNowEdge\Module\modfagi\Controller;
 
 use TelNowEdge\FreePBX\Base\Controller\AbstractController;
-use TelNowEdge\FreePBX\Base\Helper\DestinationHelper;
 use TelNowEdge\FreePBX\Base\Exception\NoResultException;
 use TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler;
 use TelNowEdge\Module\modfagi\Repository\FagiRepository;
@@ -17,7 +16,7 @@ class AjaxController extends AbstractController
                 ->get(FagiRepository::class)
                 ->getCollection()
                 ;
-        } catch(NoResultException $e) {
+        } catch (NoResultException $e) {
             $res = array();
         }
 
@@ -59,5 +58,4 @@ class AjaxController extends AbstractController
     {
         return 'fagi';
     }
-
 }
