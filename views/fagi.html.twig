@@ -43,8 +43,7 @@
 </script>
 
 <script type="text/javascript">
- // Wait one digest to prevent loading process
- setTimeout(function () {
+ $(document).ready(function() {
    processForm('#{{form.vars.name}}_trueGoto_Category', '#{{form.vars.name}}_trueGoto_Destination');
    processForm('#{{form.vars.name}}_falseGoto_Category', '#{{form.vars.name}}_falseGoto_Destination');
  });
