@@ -24,9 +24,9 @@ CREATE
             id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
             ,displayname VARCHAR (32) NOT NULL
             ,description VARCHAR (50) NOT NULL
-            ,HOST VARCHAR (30) DEFAULT NULL
+            ,host VARCHAR (30) DEFAULT NULL
             ,port VARCHAR (30) DEFAULT NULL
-            ,PATH VARCHAR (100) DEFAULT NULL
+            ,path VARCHAR (100) DEFAULT NULL
             ,query VARCHAR (100) DEFAULT NULL
             ,truegoto VARCHAR (50) DEFAULT NULL
             ,falsegoto VARCHAR (50) DEFAULT NULL
