@@ -197,7 +197,7 @@ class Fagi
         return sprintf(
             '%s?%s',
             $this->getUrl(),
-            http_build_query($query, '', '&')
+            http_build_query($query, '', '&', \PHP_QUERY_RFC3986)
         );
     }
 }
