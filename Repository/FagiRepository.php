@@ -54,6 +54,46 @@ SELECT
         );
     }
 
+    public function getByBothGoto($goto)
+    {
+        $collection = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $sql = sprintf('%s WHERE truegoto = :goto OR falsegoto = :goto', self::SQL);
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam('goto', $goto);
+        $stmt->execute();
+
+        $res = $this->fetchAll($stmt);
+
+        foreach ($res as $child) {
+            $x = $this->sqlToArray($child);
+            $collection->add($this->mapModel($x));
+        }
+
+        return $collection;
+    }
+
+    public function getByDisplayName($displayName)
+    {
+        $collection = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $sql = sprintf('%s WHERE displayname = :displayName', self::SQL);
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam('displayName', $displayName);
+        $stmt->execute();
+
+        $res = $this->fetchAll($stmt);
+
+        foreach ($res as $child) {
+            $x = $this->sqlToArray($child);
+            $collection->add($this->mapModel($x));
+        }
+
+        return $collection;
+    }
+
     public function getByDisplayNameLike($displayName)
     {
         $collection = new \Doctrine\Common\Collections\ArrayCollection();
@@ -65,7 +105,6 @@ SELECT
         $stmt->execute();
 
         $res = $this->fetchAll($stmt);
-        xdebug_break();
 
         foreach ($res as $child) {
             $x = $this->sqlToArray($child);

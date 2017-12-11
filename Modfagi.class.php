@@ -5,6 +5,7 @@ namespace FreePBX\modules;
 use TelNowEdge\FreePBX\Base\Module\Module;
 use TelNowEdge\Module\modfagi\Controller\AjaxController;
 use TelNowEdge\Module\modfagi\Controller\FagiController;
+use TelNowEdge\Module\modfagi\Controller\FunctionController;
 use TelNowEdge\Module\modfagi\Controller\PageController;
 use TelNowEdge\Module\modfagi\Resources\Migrations\FagiMigration;
 
@@ -139,5 +140,20 @@ class Modfagi extends Module implements \BMO
         }
 
         return $buttons;
+    }
+
+    public function getDestinations()
+    {
+        return $this->get(FunctionController::class)->getDestinations();
+    }
+
+    public function getDestinationInfo($dest)
+    {
+        return $this->get(FunctionController::class)->getDestinationInfo($dest);
+    }
+
+    public function checkDestinations($dest)
+    {
+        return $this->get(FunctionController::class)->checkDestinations($dest);
     }
 }
