@@ -22,7 +22,7 @@
               name="frm_fagi"
               method="post"
               action=""
-              data-fpbx-delete="{{ id is null ? '' : 'config.php?display=fagi&id='~id~'&action=del' }}"
+              data-fpbx-delete="{{ id is null ? '' : 'config.php?display=fagi&id=' ~ id ~ '&action=del' }}"
             >
               {{ form_widget(form) }}
             </form>
@@ -34,7 +34,7 @@
 </div>
 
 <script type="text/javascript">
- setTimeout(function () {
+ $(document).ready(function() {
    $('#duplicate').on('click', function () {
      $('<input />', {
        name: 'duplicate',
