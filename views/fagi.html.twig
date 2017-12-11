@@ -1,4 +1,5 @@
 {% include '@telnowedge/js/destination.js.twig' %}
+{% import '@telnowedge/Form/macro/usedBy.html.twig' as macro %}
 
 <div class="fpbx-container container-fluid">
   <div class="row">
@@ -6,9 +7,14 @@
       <div class="display no-border">
         <div class="container-fluid">
           <div class="section-title">
-            <h3>
-              {{ 'Edit fagi' | fpbxtrans }}
-            </h3>
+            <div class="row">
+              <div class="form-group">
+                <h3>
+                  {{ 'Edit fagi' | fpbxtrans }}
+                </h3>
+              </div>
+            </div>
+            {{ macro.usedBy(usedBy) }}
           </div>
           <div class="section">
             <form
@@ -39,6 +45,8 @@
        .appendTo('form.fpbx-submit')
      ;
    });
+
+   $('.used-by > [data-toggle="popover"]').popover();
  });
 </script>
 

@@ -106,7 +106,9 @@ class FagiController extends AbstractController
                 ;
         }
 
-        return $this->processForm($form, $id);
+        $usedBy = framework_check_destination_usage(sprintf('fagi,%d,1', $fagi->getId()));
+
+        return $this->processForm($form, $id, $usedBy);
     }
 
     public function deleteAction($id)
@@ -137,11 +139,12 @@ class FagiController extends AbstractController
         return 'fagi';
     }
 
-    private function processForm(\Symfony\Component\Form\Form $form, $id = null)
+    private function processForm(\Symfony\Component\Form\Form $form, $id = null, $usedBy = null)
     {
         return $this->render('fagi.html.twig', array(
             'form' => $form->createView(),
             'id' => $id,
+            'usedBy' => $usedBy,
         ));
     }
 }
