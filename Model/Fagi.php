@@ -151,6 +151,11 @@ class Fagi
         return $this->trueGoto;
     }
 
+    public function getTrueGotoAsArray()
+    {
+        return explode(',', $this->trueGoto);
+    }
+
     public function setTrueGoto($trueGoto)
     {
         $this->trueGoto = $trueGoto;
@@ -163,10 +168,36 @@ class Fagi
         return $this->falseGoto;
     }
 
+    public function getFalseGotoAsArray()
+    {
+        return explode(',', $this->falseGoto);
+    }
+
     public function setFalseGoto($falseGoto)
     {
         $this->falseGoto = $falseGoto;
 
         return $this;
+    }
+
+    public function getUrl()
+    {
+        return sprintf(
+            'agi://%s:%s/%s',
+            $this->getHost(),
+            $this->getPort(),
+            $this->getPath()
+        );
+    }
+
+    public function getUri()
+    {
+        parse_str($this->getQuery(), $query);
+
+        return sprintf(
+            '%s?%s',
+            $this->getUrl(),
+            http_build_query($query, '', '&')
+        );
     }
 }
