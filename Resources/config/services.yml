@@ -4,7 +4,15 @@ services:
     autoconfigure: false
     public: true
 
-  TelNowEdge\Module\modfagi\Controller\PageController:
+  TelNowEdge\Module\modfagi\Controller\AjaxController:
+    parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
+    autowire: true
+    autoconfigure: false
+    public: true
+    tags:
+      - "telnowedge.controller"
+
+  TelNowEdge\Module\modfagi\Controller\DialplanController:
     parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
     autowire: true
     autoconfigure: false
@@ -20,7 +28,15 @@ services:
     tags:
       - "telnowedge.controller"
 
-  TelNowEdge\Module\modfagi\Controller\AjaxController:
+  TelNowEdge\Module\modfagi\Controller\FunctionController:
+    parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
+    autowire: true
+    autoconfigure: false
+    public: true
+    tags:
+      - "telnowedge.controller"
+
+  TelNowEdge\Module\modfagi\Controller\PageController:
     parent: TelNowEdge\FreePBX\Base\Controller\AbstractController
     autowire: true
     autoconfigure: false

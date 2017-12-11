@@ -4,6 +4,7 @@ namespace FreePBX\modules;
 
 use TelNowEdge\FreePBX\Base\Module\Module;
 use TelNowEdge\Module\modfagi\Controller\AjaxController;
+use TelNowEdge\Module\modfagi\Controller\DialplanController;
 use TelNowEdge\Module\modfagi\Controller\FagiController;
 use TelNowEdge\Module\modfagi\Controller\FunctionController;
 use TelNowEdge\Module\modfagi\Controller\PageController;
@@ -33,6 +34,19 @@ class Modfagi extends Module implements \BMO
 
     public function doConfigPageInit($page)
     {
+    }
+
+    public static function myDialplanHooks()
+    {
+        return true;
+    }
+
+    public function doDialplanHook(&$ext, $engine, $priority)
+    {
+        $this
+            ->get(DialplanController::class)
+            ->run($ext, $engine, $priority)
+            ;
     }
 
     public function ajaxRequest($req, &$setting)
