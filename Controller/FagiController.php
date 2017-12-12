@@ -129,6 +129,11 @@ class FagiController extends AbstractController
         redirect('config.php?display=fagi');
     }
 
+    public function getRightNav()
+    {
+        return $this->render('right-nav.html.twig');
+    }
+
     public static function getViewsDir()
     {
         return sprintf('%s/../views', __DIR__);

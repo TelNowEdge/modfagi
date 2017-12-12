@@ -115,6 +115,20 @@ class Modfagi extends Module implements \BMO
             ;
     }
 
+    public function getRightNav()
+    {
+        $request = $this->get('request');
+
+        if ('fagi' !== $request->query->get('display') || false === $request->query->has('id')) {
+            return '';
+        }
+
+        return $this
+            ->get(FagiController::class)
+            ->getRightNav()
+            ;
+    }
+
     public function getActionBar()
     {
         $request = $this->get('request');
