@@ -49,6 +49,51 @@ class AjaxController extends AbstractController
         return $this->get('serializer')->normalize(array('success' => true));
     }
 
+    public function search($query, &$results)
+    {
+        $fagis = $this->get(FagiRepository::class)
+                      ->getCollection()
+            ;
+
+        foreach ($fagis as $fagi) {
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getId()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getDisplayName()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getDescription()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getHost()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getPath()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+
+            array_push($results, array(
+                'text' => sprintf('[FAGI] %s', $fagi->getQuery()),
+                'type' => 'get',
+                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
+            ));
+        }
+    }
+
     public static function getViewsDir()
     {
         return sprintf('%s/../views', __DIR__);
