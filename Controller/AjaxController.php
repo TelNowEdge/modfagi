@@ -57,37 +57,31 @@ class AjaxController extends AbstractController
 
         foreach ($fagis as $fagi) {
             array_push($results, array(
-                'text' => sprintf('[FAGI] %s', $fagi->getId()),
-                'type' => 'get',
-                'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
-            ));
-
-            array_push($results, array(
                 'text' => sprintf('[FAGI] %s', $fagi->getDisplayName()),
                 'type' => 'get',
                 'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
             ));
 
             array_push($results, array(
-                'text' => sprintf('[FAGI] %s', $fagi->getDescription()),
+                'text' => sprintf('[FAGI][%s] %s', $fagi->getDisplayName(), $fagi->getDescription()),
                 'type' => 'get',
                 'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
             ));
 
             array_push($results, array(
-                'text' => sprintf('[FAGI] %s', $fagi->getHost()),
+                'text' => sprintf('[FAGI][%s] %s', $fagi->getDisplayName(), $fagi->getHost()),
                 'type' => 'get',
                 'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
             ));
 
             array_push($results, array(
-                'text' => sprintf('[FAGI] %s', $fagi->getPath()),
+                'text' => sprintf('[FAGI][%s] %s', $fagi->getDisplayName(), $fagi->getPath()),
                 'type' => 'get',
                 'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
             ));
 
             array_push($results, array(
-                'text' => sprintf('[FAGI] %s', $fagi->getQuery()),
+                'text' => sprintf('[FAGI][%s] %s', $fagi->getDisplayName(), $fagi->getQuery()),
                 'type' => 'get',
                 'dest' => sprintf('?display=fagi&id=%d', $fagi->getId()),
             ));
