@@ -126,7 +126,7 @@ class Modfagi extends Module implements \BMO
     {
         $request = $this->get('request');
 
-        if ('fagi' !== $request->query->get('display') || false === $request->query->has('id')) {
+        if ('fagi' !== $request->query->get('display') || (false === $request->query->has('id') && 'add' !== $request->query->get('action'))) {
             return '';
         }
 
