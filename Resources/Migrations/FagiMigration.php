@@ -18,9 +18,9 @@
 
 namespace TelNowEdge\Module\modfagi\Resources\Migrations;
 
-use TelNowEdge\FreePBX\Base\Resources\Migrations\AbstractMigration;
+use TelNowEdge\FreePBX\Base\Resources\Migrations\AbstractSqlMigration;
 
-class FagiMigration extends AbstractMigration
+class FagiMigration extends AbstractSqlMigration
 {
     public function migration2017120702()
     {
