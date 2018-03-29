@@ -20,6 +20,7 @@ namespace TelNowEdge\Module\modfagi\Controller;
 
 use TelNowEdge\FreePBX\Base\Controller\AbstractController;
 use TelNowEdge\FreePBX\Base\Exception\NoResultException;
+use TelNowEdge\Module\modfagi\Manager\DestinationManager;
 use TelNowEdge\Module\modfagi\Repository\FagiRepository;
 
 class FunctionController extends AbstractController
@@ -64,48 +65,17 @@ class FunctionController extends AbstractController
         );
     }
 
-    public function checkDestinations($dest)
+    public function checkDestinations($dest = true)
     {
-        if (true === is_array($dest) && true === empty($dest)) {
+        if ((true === is_array($dest) && true === empty($dest))) {
             return array();
         }
 
-        try {
-            if (true === $dest) {
-                $fagis = $this
-                    ->get(FagiRepository::class)
-                    ->getCollection()
-                    ;
-            } else {
-                $fagis = $this
-                    ->get(FagiRepository::class)
-                    ->getByBothGoto(implode(',', $dest))
-                    ;
-            }
-        } catch (NoResultException $e) {
-            return array();
+        if (true === $dest) {
+            return $this->get(DestinationManager::class)->getAll();
         }
 
-        $output = array();
-
-        foreach ($fagis as $fagi) {
-            if (true !== $dest && $fagi->getTrueGoto() !== $dest && $fagi->getFalseGoto() !== $dest) {
-                continue;
-            }
-
-            $destination = $fagi->getTrueGoto() === $dest
-                ? $fagi->getTrueGoto()
-                : $fagi->getFalseGoto()
-                ;
-
-            array_push($output, array(
-                'dest' => $destination->getDestination(),
-                'description' => $fagi->getDescription(),
-                'edit_url' => sprintf('config.php?display=fagi&id=%d', $fagi->getId()),
-            ));
-        }
-
-        return $output;
+        return $this->get(DestinationManager::class)->getByDestination($dest);
     }
 
     public static function getViewsDir()
