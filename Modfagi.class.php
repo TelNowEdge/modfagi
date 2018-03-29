@@ -193,6 +193,9 @@ class Modfagi extends Module implements \BMO
         return $buttons;
     }
 
+    /**
+     * This function are called by FreePBX hook ; Please watch function.inc.php.
+     */
     public function getDestinations()
     {
         return $this->get(FunctionController::class)->getDestinations();
