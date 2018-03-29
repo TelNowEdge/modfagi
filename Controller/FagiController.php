@@ -117,7 +117,7 @@ class FagiController extends AbstractController
 
         $form->handleRequest($request);
 
-        if (true === $form->isSubmitted() && true === $form->isValid()) {
+        if (true === $form->isValid()) {
             $this->get(FagiDbHandler::class)
                  ->update($fagi)
                 ;
