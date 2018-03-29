@@ -19,40 +19,20 @@
 namespace TelNowEdge\Module\modfagi\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TelNowEdge\FreePBX\Base\Form\DestinationType;
-use TelNowEdge\Module\modfagi\Model\Fagi;
+use TelNowEdge\Module\modfagi\Model\FagiResult;
 
-class FagiType extends AbstractType
+class FagiResultType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('displayName')
-            ->add('description')
-            ->add('host')
-            ->add('port', IntegerType::class)
-            ->add('path')
-            ->add('query')
-            ->add('fagiResults', CollectionType::class, array(
-                'entry_type' => FagiResultType::class,
-                'entry_options' => array(
-                    'label' => false,
-                    'attr' => array(
-                        'data-child' => true,
-                    ),
-                ),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'by_reference' => true,
+            ->add('match', null, array(
+                'label' => 'Result value',
             ))
-            ->add('fallback', DestinationType::class, array(
-                'required' => true,
-            ))
+            ->add('goto', DestinationType::class)
             ;
     }
 
@@ -60,7 +40,7 @@ class FagiType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => Fagi::class,
+                'data_class' => FagiResult::class,
             ));
     }
 }

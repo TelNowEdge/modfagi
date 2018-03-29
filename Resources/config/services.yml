@@ -50,14 +50,38 @@ services:
     autoconfigure: false
     public: true
 
+  TelNowEdge\Module\modfagi\Repository\FagiResultRepository:
+    parent: TelNowEdge\FreePBX\Base\Repository\AbstractRepository
+    autowire: true
+    autoconfigure: false
+    public: true
+
   TelNowEdge\Module\modfagi\Handler\DbHandler\FagiDbHandler:
     parent: TelNowEdge\FreePBX\Base\Handler\AbstractDbHandler
     autowire: true
     autoconfigure: false
     public: true
 
+  TelNowEdge\Module\modfagi\Handler\DbHandler\FagiResultDbHandler:
+    parent: TelNowEdge\FreePBX\Base\Handler\AbstractDbHandler
+    autowire: true
+    autoconfigure: false
+    public: true
+
+  TelNowEdge\Module\modfagi\Manager\DestinationManager:
+    arguments:
+      - '@TelNowEdge\Module\modfagi\Repository\FagiRepository'
+
   TelNowEdge\Module\modfagi\Resources\Migrations\FagiMigration:
     parent: TelNowEdge\FreePBX\Base\Resources\Migrations\AbstractSqlMigration
     autowire: true
     autoconfigure: false
     public: true
+
+  TelNowEdge\Module\modfagi\EventSubscriber\FagiSubscriber:
+    calls:
+      - method: setContainer
+        arguments:
+          - '@service_container'
+    tags:
+      - "kernel.event_subscriber"

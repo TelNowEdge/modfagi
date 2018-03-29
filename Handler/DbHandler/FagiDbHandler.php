@@ -19,6 +19,7 @@
 namespace TelNowEdge\Module\modfagi\Handler\DbHandler;
 
 use TelNowEdge\FreePBX\Base\Handler\AbstractDbHandler;
+use TelNowEdge\Module\modfagi\Event\FagiEvent;
 use TelNowEdge\Module\modfagi\Model\Fagi;
 
 class FagiDbHandler extends AbstractDbHandler
@@ -35,8 +36,7 @@ INSERT
             ,`port`
             ,`path`
             ,`query`
-            ,`truegoto`
-            ,`falsegoto`
+            ,`fallback`
         )
     VALUES (
         :displayName
@@ -45,10 +45,14 @@ INSERT
         ,:port
         ,:path
         ,:query
-        ,:trueGoto
-        ,:falseGoto
+        ,:fallback
     )
 ';
+        $this->eventDispatcher->dispatch(
+            FagiEvent::CREATE_PRE_BIND,
+            new FagiEvent($fagi)
+        );
+
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam('displayName', $fagi->getDisplayName());
         $stmt->bindParam('description', $fagi->getDescription());
@@ -56,12 +60,21 @@ INSERT
         $stmt->bindParam('port', $fagi->getPort());
         $stmt->bindParam('path', $fagi->getPath());
         $stmt->bindParam('query', $fagi->getQuery());
-        $stmt->bindParam('trueGoto', $fagi->getTrueGoto()->getDestination());
-        $stmt->bindParam('falseGoto', $fagi->getFalseGoto()->getDestination());
+        $stmt->bindParam('fallback', $fagi->getFallback()->getDestination());
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::CREATE_PRE_SAVE,
+            new FagiEvent($fagi)
+        );
 
         $stmt->execute();
 
         $fagi->setId($this->connection->lastInsertId());
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::CREATE_POST_SAVE,
+            new FagiEvent($fagi)
+        );
 
         return true;
     }
@@ -78,11 +91,16 @@ UPDATE
         ,port = :port
         ,path = :path
         ,query = :query
-        ,truegoto = :trueGoto
-        ,falsegoto = :falseGoto
+        ,fallback = :fallback
     WHERE
         id = :id
 ';
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::UPDATE_PRE_BIND,
+            new FagiEvent($fagi)
+        );
+
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam('id', $fagi->getId());
         $stmt->bindParam('displayName', $fagi->getDisplayName());
@@ -91,10 +109,19 @@ UPDATE
         $stmt->bindParam('port', $fagi->getPort());
         $stmt->bindParam('path', $fagi->getPath());
         $stmt->bindParam('query', $fagi->getQuery());
-        $stmt->bindParam('trueGoto', $fagi->getTrueGoto()->getDestination());
-        $stmt->bindParam('falseGoto', $fagi->getFalseGoto()->getDestination());
+        $stmt->bindParam('fallback', $fagi->getFallback()->getDestination());
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::UPDATE_PRE_SAVE,
+            new FagiEvent($fagi)
+        );
 
         $stmt->execute();
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::UPDATE_POST_SAVE,
+            new FagiEvent($fagi)
+        );
 
         return true;
     }
@@ -109,12 +136,20 @@ DELETE
         id = :id
 ';
 
-        $id = $fagi->getId();
-
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam('id', $id);
+        $stmt->bindValue('id', $fagi->getId());
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::DELETE_PRE_SAVE,
+            new FagiEvent($fagi)
+        );
 
         $stmt->execute();
+
+        $this->eventDispatcher->dispatch(
+            FagiEvent::DELETE_POST_SAVE,
+            new FagiEvent($fagi)
+        );
 
         return true;
     }

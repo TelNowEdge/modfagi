@@ -61,21 +61,25 @@ class Fagi
     protected $query;
 
     /**
+     * @Assert\Type("\TelNowEdge\FreePBX\Base\Form\Model\Destination")
      * @Assert\NotNull()
-     * @Assert\Valid()
+     * @Assert\Valid(traverse=true)
      */
-    protected $trueGoto;
+    protected $fallback;
 
     /**
-     * @Assert\NotNull()
-     * @Assert\Valid()
+     * @Assert\Type("\Doctrine\Common\Collections\ArrayCollection")
+     * @Assert\Valid(traverse=true)
+     * @Assert\All({
+     *   @Assert\Type("\TelNowEdge\Module\modfagi\Model\FagiResult")
+     * })
      */
-    protected $falseGoto;
+    protected $fagiResults;
 
     public function __construct()
     {
-        $this->trueGoto = new Destination();
-        $this->falseGoto = new Destination();
+        $this->fagiResults = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fallback = new \TelNowEdge\FreePBX\Base\Form\Model\Destination();
     }
 
     public function getId()
@@ -162,36 +166,50 @@ class Fagi
         return $this;
     }
 
-    public function getTrueGoto()
+    public function getFagiResults()
     {
-        return $this->trueGoto;
+        return $this->fagiResults;
     }
 
-    public function getTrueGotoAsArray()
+    public function setFagiResults(array $fagiResults)
     {
-        return explode(',', $this->trueGoto);
-    }
-
-    public function setTrueGoto($trueGoto)
-    {
-        $this->trueGoto = $trueGoto;
+        foreach ($fagiResults as $fagiResult) {
+            $this->addFagiResult($fagiResult);
+        }
 
         return $this;
     }
 
-    public function getFalseGoto()
+    public function addFagiResult(FagiResult $fagiResult)
     {
-        return $this->falseGoto;
+        if (true === $this->fagiResults->exists(function ($key, $object) use ($fagiResult) {
+            return $object->getId() === $fagiResult->getId();
+        }) && null !== $fagiResult->getId()) {
+            return $this;
+        }
+
+        $fagiResult->setFagi($this);
+
+        $this->fagiResults->add($fagiResult);
+
+        return $this;
     }
 
-    public function getFalseGotoAsArray()
+    public function removeFagiResult(FagiResult $fagiResult)
     {
-        return explode(',', $this->falseGoto);
+        $this->fagiResults->removeElement($fagiResult);
+
+        return $this;
     }
 
-    public function setFalseGoto($falseGoto)
+    public function getFallback()
     {
-        $this->falseGoto = $falseGoto;
+        return $this->fallback;
+    }
+
+    public function setFallback(Destination $fallback)
+    {
+        $this->fallback = $fallback;
 
         return $this;
     }

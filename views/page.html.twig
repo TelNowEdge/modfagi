@@ -8,7 +8,7 @@
       </div>
 
       <table
-        data-url="ajax.php?module=modfagi&amp;command=getFagiGrid&amp;type=all"
+        data-url="ajax.php?module=modfagi&amp;command=getFagiGrid"
         data-cache="false"
         data-show-refresh="true"
         data-toolbar="#toolbar-all"
@@ -31,6 +31,7 @@
             <th data-sortable="true" data-field="port">{{ 'Port' | fpbxtrans }}</th>
             <th data-sortable="true" data-field="path">{{ 'Path' | fpbxtrans }}</th>
             <th data-sortable="true" data-field="query">{{ 'Query' | fpbxtrans }}</th>
+            <th data-sortable="true" data-field="fagiResults.length">{{ 'Number of gotos' | fpbxtrans }}</th>
             <th data-formatter="displayActionColumn" data-field="id">{{ 'Actions' | fpbxtrans }}</th>
           </tr>
         </thead>

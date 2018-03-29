@@ -22,6 +22,40 @@ use TelNowEdge\FreePBX\Base\Resources\Migrations\AbstractSqlMigration;
 
 class FagiMigration extends AbstractSqlMigration
 {
+    public function migration2018032801()
+    {
+        return '
+ALTER TABLE
+    `fagi` ADD COLUMN `fallback` VARCHAR (255) NOT NULL
+';
+    }
+
+    public function migration2018032702()
+    {
+        return '
+ALTER TABLE
+    `fagi` DROP
+        COLUMN `truegoto`
+        ,DROP
+            COLUMN `falsegoto`
+';
+    }
+
+    public function migration2018032701()
+    {
+        return '
+CREATE
+    TABLE
+        `fagi_result` (
+            `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+            ,`match` VARCHAR (255) NOT NULL
+            ,`goto` VARCHAR (255) NOT NULL
+            ,`fagi_id` INT NOT NULL
+            ,FOREIGN KEY (`fagi_id`) REFERENCES `fagi` (`id`)
+        )
+';
+    }
+
     public function migration2017120702()
     {
         return '
@@ -36,16 +70,16 @@ ALTER TABLE
         return '
 CREATE
     TABLE
-        IF NOT EXISTS fagi (
-            id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
-            ,displayname VARCHAR (32) NOT NULL
-            ,description VARCHAR (50) NOT NULL
-            ,host VARCHAR (30) DEFAULT NULL
-            ,port VARCHAR (30) DEFAULT NULL
-            ,path VARCHAR (100) DEFAULT NULL
-            ,query VARCHAR (100) DEFAULT NULL
-            ,truegoto VARCHAR (50) DEFAULT NULL
-            ,falsegoto VARCHAR (50) DEFAULT NULL
+        IF NOT EXISTS `fagi` (
+            `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
+            ,`displayname` VARCHAR (32) NOT NULL
+            ,`description` VARCHAR (50) NOT NULL
+            ,`host` VARCHAR (30) DEFAULT NULL
+            ,`port` VARCHAR (30) DEFAULT NULL
+            ,`path` VARCHAR (100) DEFAULT NULL
+            ,`query` VARCHAR (100) DEFAULT NULL
+            ,`truegoto` VARCHAR (50) DEFAULT NULL
+            ,`falsegoto` VARCHAR (50) DEFAULT NULL
         )
 ';
     }

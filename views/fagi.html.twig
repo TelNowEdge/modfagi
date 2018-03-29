@@ -1,6 +1,8 @@
 {% include '@telnowedge/js/destination.js.twig' %}
 {% import '@telnowedge/Form/macro/usedBy.html.twig' as macro %}
 
+<link rel="stylesheet" href="assets/modfagi/css/modfagi.css">
+
 <div class="fpbx-container container-fluid">
   <div class="row">
     <div class="col-sm-12">
@@ -52,7 +54,124 @@
 
 <script type="text/javascript">
  $(document).ready(function() {
-   processForm('#{{form.vars.name}}_trueGoto_Category', '#{{form.vars.name}}_trueGoto_Destination');
-   processForm('#{{form.vars.name}}_falseGoto_Category', '#{{form.vars.name}}_falseGoto_Destination');
+   addDeleteButton();
+
+   $('#fagi_fagiResults')
+     .children('.element-container')
+     .each((i, x) => {
+       /* processForm is an helper defined by freepbx-base */
+       processForm(`#fagi_fagiResults_${i}_goto_Category`, `#fagi_fagiResults_${i}_goto_Destination`);
+     });
+
+   processForm('#fagi_fallback_Category', '#fagi_fallback_Destination');
  });
+</script>
+
+<script type="text/javascript">
+ $(document).ready(() => {
+   let maxId = 0;
+   $('div[data-child]')
+     .each((i, e) => {
+       const id = $(e)
+         .attr('id')
+         .replace(/.*_(\d+)/, "$1")
+       ;
+
+       maxId = maxId < id ? id : maxId;
+     });
+
+   $('#fagi_fagiResults')
+     .parents('.form-group')
+     .find('div.control-label')
+     .find('i')
+     .eq(0)
+     .after(
+       $('<a />', {
+         class: 'btn btn-success tne-add-destination',
+       }).append(
+         $('<i />', {
+           class: 'fa fa-plus'
+         })
+       ).append(
+         ' Add destination'
+       ).on('click', () => {
+         maxId++
+         addDestination(maxId);
+         addDeleteButton();
+         processForm(`#fagi_fagiResults_${maxId}_goto_Category`, `#fagi_fagiResults_${maxId}_goto_Destination`);
+       })
+     )
+   ;
+ });
+</script>
+
+<!-- Prototype Form -->
+<script type="text/javascript">
+ const addDestination = (maxId) => {
+   let prototype = $('#fagi_fagiResults')
+     .data('prototype')
+     .replace(/__name__/g, maxId)
+   ;
+
+   $('#fagi_fagiResults')
+     .append(
+       $('<div />', {
+         class: 'element-container'
+       }).append(
+         $('<div />', {
+           class: 'row'
+         }).append(
+           $('<div />', {
+             class: 'col-md-12'
+           }).append(
+             $('<div />', {
+               class: 'row'
+             }).append(prototype)
+           )
+         )
+       )
+     )
+   ;
+ };
+
+ const addDeleteButton = () => {
+   $('div[data-child]')
+     .each((i, e) => {
+       const buttonIsAdded = $(e).find('[data-delete]').length;
+       if (buttonIsAdded !== 0) {
+         return; // e.g. continue
+       }
+       const elem = $(e);
+
+       elem
+         .append(
+           $('<div />', {
+             class: 'element-container',
+             attr: {
+               'data-delete': true
+             }
+           }).append(
+             $('<div />', {
+               class: 'row'
+             })
+           ).append(
+             $('<a />', {
+               class: 'btn btn-danger'
+             }).append(
+               $('<i />', {
+                 class: 'fa fa-minus-circle'
+               })
+             ).append(
+               ' Delete'
+             ).on('click', (e) => {
+               removePrefix(elem.closest('.element-container'));
+             })
+           )
+         );
+     });
+ };
+
+ const removePrefix = (elem) => {
+   elem.remove();
+ };
 </script>
