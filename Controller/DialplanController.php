@@ -43,17 +43,27 @@ class DialplanController extends AbstractController
 
         foreach ($fagis as $fagi) {
             $id = $fagi->getId();
-            $trueGoto = $fagi->getTrueGotoAsArray();
-            $falseGoto = $fagi->getFalseGotoAsArray();
 
             $ext->add($context, $id, '', new \ext_noop(sprintf('Fast Agi: %s', $fagi->getDescription())));
-            $ext->add($context, $id, '', new \ext_setvar('FAGIRUN', 'NO'));
+            $ext->add($context, $id, '', new \ext_execif('$[${EXISTS(${ITER})}]', 'Set', 'ITER=$[${ITER} + 1]', 'Set', 'ITER=0'));
+            $ext->add($context, $id, '', new \ext_gotoif('$[${ITER} >= 20]', 'app-blackhole,hangup,1'));
+
+            $ext->add($context, $id, '', new \ext_setvar('AGISTATUS', 'ERROR'));
+            $ext->add($context, $id, '', new \ext_setvar('FAGIRUN', 'TNE_FAKEVALUE_ENT'));
             $ext->add($context, $id, '', new \ext_setvar('FAGICIDNAME', 'TNEnotsetENT'));
             $ext->add($context, $id, '', new \ext_agi($fagi->getUri()));
-            $ext->add($context, $id, '', new \ext_execif('$["${FAGICIDNAME}" !="TNEnotsetENT"]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
-            $ext->add($context, $id, '', new \ext_gotoif('$["${FAGIRUN}"="NO"]', 'notrun'));
-            $ext->add($context, $id, '', new \ext_goto($trueGoto[2], $trueGoto[1], $trueGoto[0]));
-            $ext->add($context, $id, 'notrun', new \ext_goto($falseGoto[2], $falseGoto[1], $falseGoto[0]));
+            $ext->add($context, $id, '', new \ext_execif('$["${FAGICIDNAME}" != "TNEnotsetENT"]', 'Set', 'CALLERID(name)=${FAGICIDNAME}'));
+            $ext->add($context, $id, '', new \ext_gotoif('$["${AGISTATUS}" != "SUCCESS"]', 'fallback'));
+
+            foreach ($fagi->getFagiResults() as $fagiResult) {
+                $ext->add($context, $id, '', new \ext_gotoif(
+                    sprintf('$["${FAGIRUN}" = "%s"]', $fagiResult->getMatch()),
+                    $fagiResult->getGoto()->getDestination(),
+                    false
+                ));
+            }
+
+            $ext->add($context, $id, 'fallback', new \ext_goto($fagi->getFallback()->getDestination()));
         }
     }
 

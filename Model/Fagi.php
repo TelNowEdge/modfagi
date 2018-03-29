@@ -202,6 +202,11 @@ class Fagi
         return $this;
     }
 
+    public function getFallbackAsArray()
+    {
+        return explode(',', $this->fallback);
+    }
+
     public function getFallback()
     {
         return $this->fallback;
