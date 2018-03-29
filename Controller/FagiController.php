@@ -36,7 +36,9 @@ class FagiController extends AbstractController
 
         $form->handleRequest($request);
 
-        if (true === $form->isSubmitted() && true === $form->isValid()) {
+        if (true === $form->isValid()) {
+            needreload();
+
             $this->get(FagiDbHandler::class)
                  ->create($form->getData())
                 ;
@@ -59,7 +61,9 @@ class FagiController extends AbstractController
 
         $form->handleRequest($request);
 
-        if (true === $form->isSubmitted() && true === $form->isValid()) {
+        if (true === $form->isValid()) {
+            needreload();
+
             $fagi = $form->getData();
 
             try {
@@ -118,6 +122,8 @@ class FagiController extends AbstractController
         $form->handleRequest($request);
 
         if (true === $form->isValid()) {
+            needreload();
+
             $this->get(FagiDbHandler::class)
                  ->update($fagi)
                 ;
@@ -143,6 +149,7 @@ class FagiController extends AbstractController
              ->delete($fagi)
             ;
 
+        needreload();
         redirect('config.php?display=fagi');
     }
 
