@@ -74,7 +74,6 @@ class DestinationManager
 
     public function getByDestination(array $destination)
     {
-        xdebug_break();
         $fagis = array();
         $fallbacks = array();
         $output = array();
