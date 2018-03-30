@@ -36,8 +36,40 @@
 </div>
 
 <script type="text/javascript">
- $(document).ready(function() {
-   $('#duplicate').on('click', function () {
+ $(document).ready(() => {
+   const reOrder = (i, e) => {
+     $(e)
+       .find('.form-control')
+       .each((j, x) => {
+         $(x).attr('id', $(x).attr('id').replace(/_\d+_/, `_${i}_`));
+         $(x).attr('name', $(x).attr('name').replace(/\[\d+\]/, `[${i}]`));
+       });
+
+     $(`#fagi_fagiResults_${i}_goto_Category`)
+       .unbind()
+     ;
+
+     processForm(`#fagi_fagiResults_${i}_goto_Category`, `#fagi_fagiResults_${i}_goto_Destination`);
+   };
+
+   $('#fagi_fagiResults')
+     .sortable({
+       connectWith: '.element-container',
+       axis: 'y',
+       opacity: 0.75,
+       update: (e, x) => {
+         $('#fagi_fagiResults')
+           .children('.element-container')
+           .each(reOrder)
+         ;
+       }
+     });
+ });
+</script>
+
+<script type="text/javascript">
+ $(document).ready(() => {
+   $('#duplicate').on('click', () => {
      $('<input />', {
        name: 'duplicate',
        value: true,
@@ -53,7 +85,7 @@
 </script>
 
 <script type="text/javascript">
- $(document).ready(function() {
+ $(document).ready(() => {
    addDeleteButton();
 
    $('#fagi_fagiResults')
