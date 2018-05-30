@@ -18,10 +18,14 @@
 
 namespace TelNowEdge\Module\modfagi\Resources\Migrations;
 
+use TelNowEdge\FreePBX\Base\Model\Annotation\Migration;
 use TelNowEdge\FreePBX\Base\Resources\Migrations\AbstractSqlMigration;
 
 class FagiMigration extends AbstractSqlMigration
 {
+    /**
+     * @Migration()
+     */
     public function migration2018032801()
     {
         return '
@@ -30,6 +34,9 @@ ALTER TABLE
 ';
     }
 
+    /**
+     * @Migration()
+     */
     public function migration2018032702()
     {
         return '
@@ -41,6 +48,9 @@ ALTER TABLE
 ';
     }
 
+    /**
+     * @Migration()
+     */
     public function migration2018032701()
     {
         return '
@@ -56,6 +66,9 @@ CREATE
 ';
     }
 
+    /**
+     * @Migration()
+     */
     public function migration2017120702()
     {
         return '
@@ -65,6 +78,9 @@ ALTER TABLE
 ';
     }
 
+    /**
+     * @Migration()
+     */
     public function migration2017120701()
     {
         return '
