@@ -114,24 +114,28 @@
 
    $('#fagi_fagiResults')
      .parents('.form-group')
-     .find('div.control-label')
-     .find('i')
+     .find('label.control-label')
      .eq(0)
-     .after(
-       $('<a />', {
-         class: 'btn btn-success tne-add-destination',
+     .parent()
+     .append(
+       $('<div />', {
+         class: 'row',
        }).append(
-         $('<i />', {
-           class: 'fa fa-plus'
+         $('<a />', {
+           class: 'btn btn-success tne-add-destination',
+         }).append(
+           $('<i />', {
+             class: 'fa fa-plus'
+           })
+         ).append(
+           ' Add destination'
+         ).on('click', () => {
+           maxId++
+           addDestination(maxId);
+           addDeleteButton();
+           processForm(`#fagi_fagiResults_${maxId}_goto_Category`, `#fagi_fagiResults_${maxId}_goto_Destination`);
          })
-       ).append(
-         ' Add destination'
-       ).on('click', () => {
-         maxId++
-         addDestination(maxId);
-         addDeleteButton();
-         processForm(`#fagi_fagiResults_${maxId}_goto_Category`, `#fagi_fagiResults_${maxId}_goto_Destination`);
-       })
+       )
      )
    ;
  });
