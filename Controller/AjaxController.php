@@ -67,9 +67,14 @@ class AjaxController extends AbstractController
 
     public function search($query, &$results)
     {
-        $fagis = $this->get(FagiRepository::class)
-                      ->getCollection()
-            ;
+        try {
+            $fagis = $this
+                ->get(FagiRepository::class)
+                ->getCollection()
+                ;
+        } catch (NoResultException $e) {
+            return array();
+        }
 
         foreach ($fagis as $fagi) {
             array_push($results, array(

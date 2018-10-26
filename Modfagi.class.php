@@ -133,8 +133,9 @@ class Modfagi extends Module implements \BMO
 
     public function search($query, &$results)
     {
-        return $this->get(AjaxController::class)
-             ->search($query, $results)
+        return $this
+            ->get(AjaxController::class)
+            ->search($query, $results)
             ;
     }
 
