@@ -43,7 +43,7 @@ class FagiType extends AbstractType
             ))
             ->add('query',null, array(
                 'label_attr' => array(
-                    'fpbx_help' => 'Parametres send to FAGI at create.Format is ',
+                    'fpbx_help' => 'Parametres send to FAGI at create.Format is var1=value&var2=value&...',
                 ),
             ))
             ->add('fagiResults', CollectionType::class, array(
