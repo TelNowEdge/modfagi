@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright [2016] [TelNowEdge]
+ * Copyright 2016 TelNowEdge
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,21 @@ class FagiType extends AbstractType
             ->add('description')
             ->add('host')
             ->add('port', IntegerType::class)
-            ->add('path')
-            ->add('query')
+            ->add('path',null, array(
+                'label' => 'Function',
+                'label_attr' => array(
+                    'fpbx_help' => 'Parametres send to FAGI at create.Format is ',
+                ),
+            ))
+            ->add('query',null, array(
+                'label_attr' => array(
+                    'fpbx_help' => 'Parametres send to FAGI at create.Format is ',
+                ),
+            ))
             ->add('fagiResults', CollectionType::class, array(
+                'label_attr' => array(
+                    'fpbx_help' => 'FAGI set channel variable ${FAGIRUN} and goto destination after test.',
+                ),
                 'entry_type' => FagiResultType::class,
                 'entry_options' => array(
                     'label' => false,
@@ -51,6 +63,9 @@ class FagiType extends AbstractType
                 'by_reference' => true,
             ))
             ->add('fallback', DestinationType::class, array(
+                'label_attr' => array(
+                    'fpbx_help' => 'Destination if ${FAGIRUN} not match.',
+                ),
                 'required' => true,
             ))
             ;
