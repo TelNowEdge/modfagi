@@ -42,7 +42,7 @@
 
 <script type="text/javascript">
  function displayActionColumn(id) {
-   const href = window.location.href;
+   const href = window.location.href.replace(/#$/, '');
 
    return $('<div />')
      .append(
