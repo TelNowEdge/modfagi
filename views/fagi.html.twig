@@ -149,25 +149,7 @@
      .replace(/__name__/g, maxId)
    ;
 
-   $('#fagi_fagiResults')
-     .append(
-       $('<div />', {
-         class: 'element-container'
-       }).append(
-         $('<div />', {
-           class: 'row'
-         }).append(
-           $('<div />', {
-             class: 'col-md-12'
-           }).append(
-             $('<div />', {
-               class: 'row'
-             }).append(prototype)
-           )
-         )
-       )
-     )
-   ;
+   $('#fagi_fagiResults').append(prototype);
  };
 
  const addDeleteButton = () => {
