@@ -104,9 +104,9 @@ class DestinationManager
                     array_push($output, array(
                         'dest' => $fagiResult->getGoto()->getDestination(),
                         'description' => sprintf(
-                            '[%s] %s',
-                            $fagiResult->getMatch(),
-                            $fagi->getDisplayName()
+                            'Fast AGI: %s (V:%s)',
+                            $fagi->getDisplayName(),
+                            $fagiResult->getMatch()
                         ),
                         'edit_url' => sprintf('config.php?display=fagi&id=%d', $fagi->getId()),
                     ));
@@ -123,9 +123,9 @@ class DestinationManager
                 array_push($output, array(
                     'dest' => $fagi->getFallback()->getDestination(),
                     'description' => sprintf(
-                        '[%s] %s',
-                        'Fallback',
-                        $fagi->getDisplayName()
+                        'Fast AGI: %s (V:%s)',
+                        $fagi->getDisplayName(),
+                        'Fallback'
                     ),
                     'edit_url' => sprintf('config.php?display=fagi&id=%d', $fagi->getId()),
                 ));
