@@ -19,6 +19,7 @@
 namespace FreePBX\modules;
 
 use TelNowEdge\FreePBX\Base\Module\Module;
+use TelNowEdge\FreePBX\Base\Resources\Migrations\MigrationBuilder;
 use TelNowEdge\Module\modfagi\Controller\AjaxController;
 use TelNowEdge\Module\modfagi\Controller\DialplanController;
 use TelNowEdge\Module\modfagi\Controller\FagiController;
@@ -30,10 +31,10 @@ class Modfagi extends Module implements \BMO
 {
     public function install()
     {
-        $this
-            ->get(FagiMigration::class)
-            ->migrate()
-            ;
+        $migrationBuilder = MigrationBuilder::createBuilder();
+        $migrationBuilder->addMigration($this->get(FagiMigration::class));
+
+        $migrationBuilder->install();
     }
 
     public function uninstall()
