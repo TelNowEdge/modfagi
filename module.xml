@@ -1,13 +1,13 @@
 <module>
   <rawname>modfagi</rawname>
   <name>Fast Agi</name>
-  <version>6.0.0</version>
+  <version>6.1.0</version>
   <type>setup</type>
   <category>TelNowEdge</category>
   <publisher>TelNowEdge</publisher>
   <license>Apache-2.0</license>
   <changelog>
-
+    *6.1.0:  New migration et passage Version 6.1.x de TNE
   </changelog>
   <description>
     Go call to FastAgi, if fast agi is not present go to failover, if fast agi return goes to normal destination.
